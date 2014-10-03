@@ -60,8 +60,10 @@ class Slack extends Adapter
       mrkdwn_in: data.mrkdwn_in or []
 
     args = JSON.stringify
-      username    : @robot.name
+      username    : message.username or @robot.name
       channel     : channel
+      icon_url    : message.icon_url
+      icon_emoji  : message.icon_emoji
       attachments : [attachment]
       link_names  : @options.link_names if @options?.link_names?
     @post "/services/hooks/hubot", args
